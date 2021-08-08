@@ -1,4 +1,4 @@
-# lua-script
+# 使用说明
 lua 脚本
 
 把他们放在TBC 的根目录下,注意检查编码是否是ANSI
