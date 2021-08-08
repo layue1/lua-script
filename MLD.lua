@@ -1,44 +1,44 @@
 function mail()
-    for i=1,4,1 do --Ñ­»·½«ËùÓĞ¸±±³°üµÄÎïÆ·¶¼·ÅÈë,Ö±µ½ÌîÂúÓÊ¼ş
-        bagNum = getBagSlotNum(i) --»ñµÃ±³°üµÄ´óĞ¡
-        unUsedSLot = getUnusedBagSlotNum(i)--»ñµÃËùÓĞ±³°üÊ£ÓàµÄ¿Õ¸ñ×Ó
-        if bagNum-unUsedSLot > 0 then --Èç¹û±³°üÖĞÓĞ¶«Î÷
-            contactClosetMailObjec()--ÓëÓÊÏä»¥¶¯(´ò¿ªÓÊÏä)
-            clickSendMailFrame()--´ò¿ª·¢ËÍÒ³Ãæ
-            setMailTargetName()--ÌîĞ´Ãû×Ö£¬Ãû×ÖÔÚ½Å±¾½çÃæÌîĞ´
-            for k = 1,bagNum,1 do --³¢ÊÔ½«±³°üÖĞµÄÃ¿¸ö¸ñ×Ó¶¼·ÅÈëÓÊÏä£¬Ã»ÓĞ¾Í²»·Å£¬ÓĞ¾Í»á·Å½øÈ¥
-                putMailItem(i,k) --·ÅÈë
+    for i=1,4,1 do --å¾ªç¯å°†æ‰€æœ‰å‰¯èƒŒåŒ…çš„ç‰©å“éƒ½æ”¾å…¥,ç›´åˆ°å¡«æ»¡é‚®ä»¶
+        bagNum = getBagSlotNum(i) --è·å¾—èƒŒåŒ…çš„å¤§å°
+        unUsedSLot = getUnusedBagSlotNum(i)--è·å¾—æ‰€æœ‰èƒŒåŒ…å‰©ä½™çš„ç©ºæ ¼å­
+        if bagNum-unUsedSLot > 0 then --å¦‚æœèƒŒåŒ…ä¸­æœ‰ä¸œè¥¿
+            contactClosetMailObjec()--ä¸é‚®ç®±äº’åŠ¨(æ‰“å¼€é‚®ç®±)
+            clickSendMailFrame()--æ‰“å¼€å‘é€é¡µé¢
+            setMailTargetName()--å¡«å†™åå­—ï¼Œåå­—åœ¨è„šæœ¬ç•Œé¢å¡«å†™
+            for k = 1,bagNum,1 do --å°è¯•å°†èƒŒåŒ…ä¸­çš„æ¯ä¸ªæ ¼å­éƒ½æ”¾å…¥é‚®ç®±ï¼Œæ²¡æœ‰å°±ä¸æ”¾ï¼Œæœ‰å°±ä¼šæ”¾è¿›å»
+                putMailItem(i,k) --æ”¾å…¥
             end
-            sendMail()--·¢ËÍÓÊ¼ş
-            sleep(500) -- ÂÔÎ¢ÑÓ³Ù£¬·ÀÖ¹·¢ÓÊ¼ş¿¨×¡
+            sendMail()--å‘é€é‚®ä»¶
+            sleep(500) -- ç•¥å¾®å»¶è¿Ÿï¼Œé˜²æ­¢å‘é‚®ä»¶å¡ä½
         end
     end
 end
 
-function pickUp(x,y) --Ê°È¡
+function pickUp(x,y) --æ‹¾å–
     local distance = 0
 
-    while true do -- Ñ­»·n´Î£¨mld¿ÉÄÜÓĞºÜ¶à¹Ö£©
+    while true do -- å¾ªç¯næ¬¡ï¼ˆmldå¯èƒ½æœ‰å¾ˆå¤šæ€ªï¼‰
         sleep(10)
-        if getRoleCurrentHP() == -1 then --Èç¹û½áÊø½Å±¾¾ÍÍË³ö
+        if getRoleCurrentHP() == -1 then --å¦‚æœç»“æŸè„šæœ¬å°±é€€å‡º
             break
         end
-        local n = getUnusedAllBagSlotNum()--»ñµÃ±³°üÊ£ÓàµÄ¸ñ×ÓÊıÄ¿
-        if(n > 4) then --Èç¹û±³°ü´óÓÚ4¸ñ×Ó¾ÍÊ°È¡
-            local ID1,ID2 = getClosetTargetIDFilterCanBeLoot() --»ñµÃ×î½üµÄ¿ÉÒÔ±»Ê°È¡µÄ¹íÎİ
-            if ID1 ~= 0 and ID1 ~= -1 then --Ö¤Ã÷ËÑË÷µ½ÁË¹ÖÎï
-                distance = getTargetAndPositionDistanceByID(ID1,ID2,x,y,3) --»ñµÃÄ¿±êÓëÍæ¼ÒµÄ¾àÀë
-                if distance <= 7 and distance >= 0 then -- Èç¹ûÔÚ8Âë·¶Î§ÄÚ£¬·ÀÖ¹È¥Ê°È¡Ì«Ô¶µÄÄ¿±ê£¬È»ºó±»¿¨×¡
-                    contactTarget(ID1,ID2) --Ê°È¡Ä¿±ê
-                    useLua("/click AceGUI30Button11") --Ïú»ÙÀ¬»ø
-                    useLua("/click AceGUI30Button1") --Ïú»ÙÀ¬»ø
+        local n = getUnusedAllBagSlotNum()--è·å¾—èƒŒåŒ…å‰©ä½™çš„æ ¼å­æ•°ç›®
+        if(n > 4) then --å¦‚æœèƒŒåŒ…å¤§äº4æ ¼å­å°±æ‹¾å–
+            local ID1,ID2 = getClosetTargetIDFilterCanBeLoot() --è·å¾—æœ€è¿‘çš„å¯ä»¥è¢«æ‹¾å–çš„é¬¼å±‹
+            if ID1 ~= 0 and ID1 ~= -1 then --è¯æ˜æœç´¢åˆ°äº†æ€ªç‰©
+                distance = getTargetAndPositionDistanceByID(ID1,ID2,x,y,3) --è·å¾—ç›®æ ‡ä¸ç©å®¶çš„è·ç¦»
+                if distance <= 7 and distance >= 0 then -- å¦‚æœåœ¨8ç èŒƒå›´å†…ï¼Œé˜²æ­¢å»æ‹¾å–å¤ªè¿œçš„ç›®æ ‡ï¼Œç„¶åè¢«å¡ä½
+                    contactTarget(ID1,ID2) --æ‹¾å–ç›®æ ‡
+                    useLua("/click AceGUI30Button11") --é”€æ¯åƒåœ¾
+                    useLua("/click AceGUI30Button1") --é”€æ¯åƒåœ¾
                     sleep(300)
-                    useLua("/click StaticPopup1Button1") --Ê°È¡À¶×°
-                    useItem("¸¡Ôü¸²¸ÇµÄ´ü×Ó")
-                else --·¶Î§Íâ¾ÍÌø³öÑ­»·
+                    useLua("/click StaticPopup1Button1") --æ‹¾å–è“è£…
+                    useItem("æµ®æ¸£è¦†ç›–çš„è¢‹å­")
+                else --èŒƒå›´å¤–å°±è·³å‡ºå¾ªç¯
                     break
                 end
-            else --´ú±íÃ»ÓĞ¿ÉÒÔÊ°È¡µÄÄ¿±êÁË£¬Ìø³öÑ­»·
+            else --ä»£è¡¨æ²¡æœ‰å¯ä»¥æ‹¾å–çš„ç›®æ ‡äº†ï¼Œè·³å‡ºå¾ªç¯
                 break
             end
         else
@@ -49,8 +49,8 @@ function pickUp(x,y) --Ê°È¡
     
 end
 function jumpOutOfRoof()
-    while getRoleflag1() == 0x08 do -- µÈ´ıÍÑÕ½½áÊø
-        prints("µÈ´ıÍÑÕ½")
+    while getRoleflag1() == 0x08 do -- ç­‰å¾…è„±æˆ˜ç»“æŸ
+        prints("ç­‰å¾…è„±æˆ˜")
         sleep(200)
     end
     local x,y,z = getRolePosition()
@@ -62,7 +62,7 @@ function jumpOutOfRoof()
     end
 end
 
-function jumpToRoof() --ÌøÉÏÈ¥
+function jumpToRoof() --è·³ä¸Šå»
     moveB(663.822,-251.164,-61.5678)
     sleep(200)
     jumpB()
@@ -71,11 +71,11 @@ end
 function jumpCliff()
     moveB(814.702,-78.6533,-88.6579)
     sleep(1500)
-    castSpellB("ÉÁÏÖÊõ")
+    castSpellB("é—ªç°æœ¯")
 end
 
 function openGate()
-    local ID1,ID2 = getClosetTargetIDToAPositionFilterName("Ê¯ÃÅ",-1422.38, 2924.89,6,3)
+    local ID1,ID2 = getClosetTargetIDToAPositionFilterName("çŸ³é—¨",-1422.38, 2924.89,6,3)
     local flag1 = getTargetFlag1ByID(ID1,ID2,6)
     if flag1 == 1 then
         contactTarget(ID1,ID2)
@@ -88,28 +88,28 @@ function drink()
     local breadBag, breadSlot = getBelongBagAndSlotByID(22895)
     if drinkSlot == 0 or breadSlot == 0 then
         standBy()
-        castSpellA("ÔìÊ³Êõ(µÈ¼¶ 7)")
+        castSpellA("é€ é£Ÿæœ¯(ç­‰çº§ 7)")
         sleep(3500)
-        castSpellA("ÔìË®Êõ(µÈ¼¶ 8)")
+        castSpellA("é€ æ°´æœ¯(ç­‰çº§ 8)")
         sleep(3500)
     end
     local je1Bag, je1Slot = getBelongBagAndSlotByID(22044)
     if je1Slot == 0 then
         standBy()
-        castSpellA("ÖÆÔìÄ§·¨ÓñÊ¯")
+        castSpellA("åˆ¶é€ é­”æ³•ç‰çŸ³")
         sleep(3500)
     end
     if getRoleCurrentHP() < 95 and getRoleCurrentMP() < 95 and getRoleCurrentHP() >= 0 and getRoleCurrentMP() >= 0 then
-        useItem("Ä§·¨Èâ¹ğÃæ°ü")
-        useItem("Ä§·¨É½ÈªË®")
+        useItem("é­”æ³•è‚‰æ¡‚é¢åŒ…")
+        useItem("é­”æ³•å±±æ³‰æ°´")
     end
     while true do
         if getRoleCurrentHP() == -1 then
             break
         end
         if IsBuffExist(29073) == 0 or IsBuffExist(34291) == 0 then
-            useItem("Ä§·¨Èâ¹ğÃæ°ü")
-            useItem("Ä§·¨É½ÈªË®")
+            useItem("é­”æ³•è‚‰æ¡‚é¢åŒ…")
+            useItem("é­”æ³•å±±æ³‰æ°´")
         end
         if getRoleCurrentHP() >= 95 and getRoleCurrentMP() >= 95 then
             break
@@ -120,11 +120,11 @@ function drink()
                 ID1,ID2 = getClosetTargetIDInBattle(3)
                 local distance = getTargetAndRoleDistanceByID(ID1,ID2,3)
                 if distance <= 10 and distance > 0 then
-                    castSpellB("Ä§±¬Êõ(µÈ¼¶ 8)")
+                    castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 8)")
                 end
             end
-            useItem("Ä§·¨Èâ¹ğÃæ°ü")
-            useItem("Ä§·¨É½ÈªË®")
+            useItem("é­”æ³•è‚‰æ¡‚é¢åŒ…")
+            useItem("é­”æ³•å±±æ³‰æ°´")
         end
         sleep(1000)
     end
@@ -134,26 +134,26 @@ end
 function useIceLance(x,y)
     local ID1,ID2 = getClosetTargetIDToAPosition(x,y,3)
     chooseTarget(ID1,ID2)
-    castSpellB("±ùÇ¹Êõ(µÈ¼¶ 1)")
+    castSpellB("å†°æªæœ¯(ç­‰çº§ 1)")
 end
 
 function silence(name,x,y)
     local ID1,ID2 = getClosetTargetIDToAPositionFilterName(name,x,y,3,8)
     prints(name)
     chooseTarget(ID1,ID2)
-    castSpellA("·¨Êõ·´ÖÆ")
+    castSpellA("æ³•æœ¯ååˆ¶")
 end
 
 function sheildAndAttact()
     local coolDown = getSpellCoolDown(33405)
     if coolDown == 1 and IsBuffExist(33405) == false then
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
     else
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
     end
 end
 
-function firstLevelStormGathered(x,y,z) --Ò»¼¶±©·çÑ©¾Û¹ÖÅĞ¶Ï
+function firstLevelStormGathered(x,y,z) --ä¸€çº§æš´é£é›ªèšæ€ªåˆ¤æ–­
     local ID1,ID2 = getClosetTargetIDInBattle(3)
     local distance = getTargetAndRoleDistanceByID(ID1,ID2,3)
     local spellID = 0
@@ -161,14 +161,14 @@ function firstLevelStormGathered(x,y,z) --Ò»¼¶±©·çÑ©¾Û¹ÖÅĞ¶Ï
     if distance <= 8 and distance >=0 and ID1 ~= 0 and ID1 ~= -1 then
         return 0
     else
-        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
         sleep(5)
         castSpellPosition(x,y,z)
         for i = 1, 10, 1 do
             spellID = getRoleCurrentSpellID()
             if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a then
-                prints("±©·çÑ©±»´ò¶Ï")
-                castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+                prints("æš´é£é›ªè¢«æ‰“æ–­")
+                castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
                 sleep(5)
                 castSpellPosition(x,y,z)
             end
@@ -178,15 +178,15 @@ function firstLevelStormGathered(x,y,z) --Ò»¼¶±©·çÑ©¾Û¹ÖÅĞ¶Ï
 
 end
 
-function ifMnionsUnderFloor(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½Â¥ÌİÏÂ
+function ifMnionsUnderFloor(x,y,z) --æ£€æµ‹æ€ªç¾¤æ˜¯å¦åˆ°æ¥¼æ¢¯ä¸‹
     local ID1,ID2,distance,spellID = 0,0,0,0
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(100)
         if getRoleCurrentHP() < 70 then
-            useItem("ÁéÎÆ²¼±Á´ø")
+            useItem("çµçº¹å¸ƒç»·å¸¦")
         end
         if getRoleCurrentMP() < 40 then
-            useItem("»½ĞÑ")
+            useItem("å”¤é†’")
         end
         ID1,ID2 = getClosetTargetIDToAPositionInBattle(680.208, -246.522,3)
         distance = getTargetAndPositionDistanceByID(ID1,ID2,680.208,-246.522,3)
@@ -194,14 +194,14 @@ function ifMnionsUnderFloor(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½Â¥ÌİÏÂ
         if distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
             if distance <= 3.5 and distance >= 0 then
                 
-                castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+                castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
                 sleep(5)
                 castSpellPosition(x,y,z)
                 for i = 1, 10, 1 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     end
@@ -213,28 +213,28 @@ function ifMnionsUnderFloor(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½Â¥ÌİÏÂ
     end
 end
 
-function ifMnionsInposition(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂÑ©µã
+function ifMnionsInposition(x,y,z) --æ£€æµ‹æ€ªç¾¤æ˜¯å¦åˆ°ä¸‹é›ªç‚¹
     local ID1,ID2,distance,spellID = 0,0,0,0
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(10)
         if getRoleCurrentHP() < 70 then
-            useItem("ÁéÎÆ²¼±Á´ø")
+            useItem("çµçº¹å¸ƒç»·å¸¦")
         end
         if getRoleCurrentMP() < 40 then
-            useItem("»½ĞÑ")
+            useItem("å”¤é†’")
         end
         ID1,ID2 = getClosetTargetIDToAPositionInBattle(787.684, -508.677,3)
         distance = getTargetAndPositionDistanceByID(ID1,ID2,787.684, -508.677,3)
         if distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
             if distance <= 3.5 and distance >= 0 then
-                castSpellB("±©·çÑ©(µÈ¼¶ 7)")
+                castSpellB("æš´é£é›ª(ç­‰çº§ 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
                 for i = 1, 10, 1 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellB("±©·çÑ©(µÈ¼¶ 7)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellB("æš´é£é›ª(ç­‰çº§ 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     end
@@ -246,28 +246,28 @@ function ifMnionsInposition(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂÑ©µã
     end
 end
 
-function ifMnionsInposition2(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂÑ©µã2
+function ifMnionsInposition2(x,y,z) --æ£€æµ‹æ€ªç¾¤æ˜¯å¦åˆ°ä¸‹é›ªç‚¹2
     local ID1,ID2,distance,spellID = 0,0,0,0
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(10)
         if getRoleCurrentHP() < 70 then
-            useItem("ÁéÎÆ²¼±Á´ø")
+            useItem("çµçº¹å¸ƒç»·å¸¦")
         end
         if getRoleCurrentMP() < 40 then
-            useItem("»½ĞÑ")
+            useItem("å”¤é†’")
         end
         ID1,ID2 = getClosetTargetIDToAPositionInBattle(787.684, -508.677,3)
         distance = getTargetAndPositionDistanceByID(ID1,ID2,787.684, -508.677,3)
         if distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
             if distance <= 3.5 and distance >= 0 then
-                castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+                castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
                 sleep(5)
                 castSpellPosition(x,y,z)
                 for i = 1, 10, 1 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     end
@@ -280,22 +280,22 @@ function ifMnionsInposition2(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂÑ©µã2
 end
 
 
-function IfminionsOnUp(x,y,z)--¼ì²â¹ÖÈºÊÇ·ñµ½ÉÏ·½ÏÂÑ©µã
+function IfminionsOnUp(x,y,z)--æ£€æµ‹æ€ªç¾¤æ˜¯å¦åˆ°ä¸Šæ–¹ä¸‹é›ªç‚¹
     local ID1,ID2,x1,y1,z1,distance,coolDown,flag = 0,0,0,0,0,0,0,0
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(10)
         flag = getRoleflag1()
-        if flag == 0 then --ÍÑÕ½ÁË¾ÍÌø³ö
+        if flag == 0 then --è„±æˆ˜äº†å°±è·³å‡º
             break
         end
         sleep(100)
         if getRoleCurrentMP() < 30 then
-            useItem("·¨Á¦¸ÕÓñ")
+            useItem("æ³•åŠ›åˆšç‰")
         end
-        if isOnlyOneMinionInBattleFilterName("¶¾ÁÓÄ§") == 1 then
-            ID1,ID2 = getClosetTargetIDInBattleFilterName("¶¾ÁÓÄ§",3,4)
+        if isOnlyOneMinionInBattleFilterName("æ¯’åŠ£é­”") == 1 then
+            ID1,ID2 = getClosetTargetIDInBattleFilterName("æ¯’åŠ£é­”",3,4)
             x1,y1,z1 = getTargetPositionByID(ID1,ID2,3)
-            castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+            castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
             sleep(5)
             castSpellPosition(x1,y1,z1)
             sleep(8000)
@@ -305,19 +305,19 @@ function IfminionsOnUp(x,y,z)--¼ì²â¹ÖÈºÊÇ·ñµ½ÉÏ·½ÏÂÑ©µã
         distance = getTargetAndPositionDistanceByID(ID1,ID2,801.757, -512.926,3)
         if distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
             if distance <= 9 and distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
-                castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+                castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
                 for i = 1, 100 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() > 40 then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     elseif spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() <= 40 then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellA("±©·çÑ©(µÈ¼¶ 1)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellA("æš´é£é›ª(ç­‰çº§ 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     end
@@ -330,9 +330,9 @@ function IfminionsOnUp(x,y,z)--¼ì²â¹ÖÈºÊÇ·ñµ½ÉÏ·½ÏÂÑ©µã
                 end
                 coolDown = getSpellCoolDown(12043)
                 if coolDown == 1 then
-                    castSpellA("Æø¶¨ÉñÏĞ")
+                    castSpellA("æ°”å®šç¥é—²")
                     sleep(10)
-                    castSpellA("ÁÒÑæ·ç±©(µÈ¼¶ 7)")
+                    castSpellA("çƒˆç„°é£æš´(ç­‰çº§ 7)")
                     sleep(20)
                     castSpellPosition(799.606,-516.241,-42.8003)
                     --sleep(1400)
@@ -344,22 +344,22 @@ function IfminionsOnUp(x,y,z)--¼ì²â¹ÖÈºÊÇ·ñµ½ÉÏ·½ÏÂÑ©µã
     end
 end
 
-function IfminionsOnDown(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
+function IfminionsOnDown(x,y,z) --æ£€æµ‹æ€ªç¾¤æ˜¯å¦åˆ°ä¸‹æ–¹ä¸‹é›ªç‚¹
     local ID1,ID2,x1,y1,z1,distance,flag = 0,0,0,0,0,0,0
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(10)
         flag = getRoleflag1()
-        if flag == 0 then --ÍÑÕ½ÁË¾ÍÌø³ö
+        if flag == 0 then --è„±æˆ˜äº†å°±è·³å‡º
             break
         end
         sleep(100)
         if getRoleCurrentMP() < 30  then
-            useItem("·¨Á¦¸ÕÓñ")
+            useItem("æ³•åŠ›åˆšç‰")
         end
-        if isOnlyOneMinionInBattleFilterName("¶¾ÁÓÄ§") == 1 then
-            ID1,ID2 = getClosetTargetIDInBattleFilterName("¶¾ÁÓÄ§",3,4)
+        if isOnlyOneMinionInBattleFilterName("æ¯’åŠ£é­”") == 1 then
+            ID1,ID2 = getClosetTargetIDInBattleFilterName("æ¯’åŠ£é­”",3,4)
             x1,y1,z1 = getTargetPositionByID(ID1,ID2,3)
-            castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+            castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
             sleep(5)
             castSpellPosition(x1,y1,z1)
             sleep(8000)
@@ -369,19 +369,19 @@ function IfminionsOnDown(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
         distance = getTargetAndPositionDistanceByID(ID1,ID2,786.727, -524.713,3)
         if distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
             if distance <= 9 and distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
-                castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+                castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
                 for i = 1, 100 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() > 40 then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     elseif spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() <= 40 then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellA("±©·çÑ©(µÈ¼¶ 1)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellA("æš´é£é›ª(ç­‰çº§ 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     end
@@ -401,7 +401,7 @@ function IfminionsOnDown(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
     end
 end
 
-function IfminionsOnMid(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
+function IfminionsOnMid(x,y,z) --æ£€æµ‹æ€ªç¾¤æ˜¯å¦åˆ°ä¸‹æ–¹ä¸‹é›ªç‚¹
     if IsBuffExist(33405) == 0 then
         return 0
     end
@@ -409,17 +409,17 @@ function IfminionsOnMid(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(10)
         flag = getRoleflag1()
-        if flag == 0 then --ÍÑÕ½ÁË¾ÍÌø³ö
+        if flag == 0 then --è„±æˆ˜äº†å°±è·³å‡º
             break
         end
         sleep(100)
         if getRoleCurrentMP() < 30  then
-            useItem("·¨Á¦¸ÕÓñ")
+            useItem("æ³•åŠ›åˆšç‰")
         end
-        if isOnlyOneMinionInBattleFilterName("¶¾ÁÓÄ§") == 1 then
-            ID1,ID2 = getClosetTargetIDInBattleFilterName("¶¾ÁÓÄ§",3,4)
+        if isOnlyOneMinionInBattleFilterName("æ¯’åŠ£é­”") == 1 then
+            ID1,ID2 = getClosetTargetIDInBattleFilterName("æ¯’åŠ£é­”",3,4)
             x1,y1,z1 = getTargetPositionByID(ID1,ID2,3)
-            castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+            castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
             sleep(5)
             castSpellPosition(x1,y1,z1)
             sleep(8000)
@@ -429,19 +429,19 @@ function IfminionsOnMid(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
         distance = getTargetAndPositionDistanceByID(ID1,ID2,795.169,-521.756,3)
         if distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
             if distance <= 9 and distance >= 0 and ID1 ~= 0 and ID1 ~= -1 then
-                castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+                castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
                 for i = 1, 100 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() > 40 then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellA("±©·çÑ©(µÈ¼¶ 7)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellA("æš´é£é›ª(ç­‰çº§ 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     elseif spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() <= 40 then
-                        prints("±©·çÑ©±»´ò¶Ï")
-                        castSpellA("±©·çÑ©(µÈ¼¶ 1)")
+                        prints("æš´é£é›ªè¢«æ‰“æ–­")
+                        castSpellA("æš´é£é›ª(ç­‰çº§ 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     end
@@ -459,24 +459,24 @@ function IfminionsOnMid(x,y,z) --¼ì²â¹ÖÈºÊÇ·ñµ½ÏÂ·½ÏÂÑ©µã
     end
 end
 
-function shield()--ÊÇ·ñÉÏ¶Ü
-    local coolDown2 = getSpellCoolDown(33405) -- ¶Ü
-    local coolDown3 = getSpellCoolDown(12472) --ÑªÂö
-    local coolDown4 = getSpellCoolDown(11958) -- ¼«Àä
+function shield()--æ˜¯å¦ä¸Šç›¾
+    local coolDown2 = getSpellCoolDown(33405) -- ç›¾
+    local coolDown3 = getSpellCoolDown(12472) --è¡€è„‰
+    local coolDown4 = getSpellCoolDown(11958) -- æå†·
     if coolDown2 == 1 then
-        castSpellA("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellA("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         sleep(1400)
     elseif coolDown2 == 0 and IsBuffExist(33405) == 0 then
-        castSpellB("±ùÀäÑªÂö")
+        castSpellB("å†°å†·è¡€è„‰")
     elseif coolDown3 == 0 and coolDown2 == 0 and coolDown4 == 1 and IsBuffExist(33405) == 0 then
-        castSpellB("¼±ËÙÀäÈ´")
-        castSpellA("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("æ€¥é€Ÿå†·å´")
+        castSpellA("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         sleep(1400)
     end
 end
 
 
-function firstLevelStorm(x,y,z)--ÏÂÒ»¼¶±©·çÑ©
+function firstLevelStorm(x,y,z)--ä¸‹ä¸€çº§æš´é£é›ª
     local ID1,ID2 = getClosetTargetIDInBattle(3)
     local distance = getTargetAndRoleDistanceByID(ID1,ID2,3)
     local x1,y1,z1 = getTargetPositionByID(ID1,ID2,3)
@@ -486,14 +486,14 @@ function firstLevelStorm(x,y,z)--ÏÂÒ»¼¶±©·çÑ©
     if distance <= 8 and distance >=0 and math.abs(z2 - z1)<=2 and ID1 ~= 0 and ID1 ~= -1 then
         return 0
     else
-        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
         sleep(5)
         castSpellPosition(x,y,z)
         for i = 1, 10, 1 do
             spellID = getRoleCurrentSpellID()
             if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a then
-                prints("±©·çÑ©±»´ò¶Ï")
-                castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+                prints("æš´é£é›ªè¢«æ‰“æ–­")
+                castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
                 sleep(5)
                 castSpellPosition(x,y,z)
             end
@@ -502,7 +502,7 @@ function firstLevelStorm(x,y,z)--ÏÂÒ»¼¶±©·çÑ©
     end
 end
 
-function maxLevelStorm(x,y,z)--ÏÂÒ»¼¶±©·çÑ©
+function maxLevelStorm(x,y,z)--ä¸‹ä¸€çº§æš´é£é›ª
     local ID1,ID2 = getClosetTargetIDInBattle(3)
     local distance = getTargetAndRoleDistanceByID(ID1,ID2,3)
     local x1,y1,z1 = getTargetPositionByID(ID1,ID2,3)
@@ -512,14 +512,14 @@ function maxLevelStorm(x,y,z)--ÏÂÒ»¼¶±©·çÑ©
     if distance <= 8 and distance >=0 and math.abs(z2 - z1)<=2 and ID1 ~= 0 and ID1 ~= -1 then
         return 0
     else
-        castSpellB("±©·çÑ©(µÈ¼¶ 7)")
+        castSpellB("æš´é£é›ª(ç­‰çº§ 7)")
         sleep(5)
         castSpellPosition(x,y,z)
         for i = 1, 10, 1 do
             spellID = getRoleCurrentSpellID()
             if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a then
-                prints("±©·çÑ©±»´ò¶Ï")
-                castSpellB("±©·çÑ©(µÈ¼¶ 7)")
+                prints("æš´é£é›ªè¢«æ‰“æ–­")
+                castSpellB("æš´é£é›ª(ç­‰çº§ 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
             end
@@ -528,7 +528,7 @@ function maxLevelStorm(x,y,z)--ÏÂÒ»¼¶±©·çÑ©
     end
 end
 
-function jumpUp() --ÌøÉÏÈ¥
+function jumpUp() --è·³ä¸Šå»
     moveB(785.245,-490.023,-40.0391)
     sleep(200)
     jumpB()
@@ -537,29 +537,29 @@ end
 
 
 function battle()
-    moveA( 781.57,-497.335,-42.7343 )--ÊÇ·ñÉÏ¶Ü--×ßµ½Ê÷ÉÏ¿ªÊ¼ÏÂÏÂÃæµÄÑ©1
+    moveA( 781.57,-497.335,-42.7343 )--æ˜¯å¦ä¸Šç›¾--èµ°åˆ°æ ‘ä¸Šå¼€å§‹ä¸‹ä¸‹é¢çš„é›ª1
     shield()
     IfminionsOnMid(795.169,-521.756,-44.8361)
-    IfminionsOnDown(784.664,-523.728,-49.6389) --ÏÂÏÂÃæµÄÑ©
+    IfminionsOnDown(784.664,-523.728,-49.6389) --ä¸‹ä¸‹é¢çš„é›ª
     shield()
     sleep(100)
     jumpUp()
-    moveA( 785.245,-490.023,-40.0391 )--ÅÜµ½ÉÏÃæ£¬µ½Î»
-    IfminionsOnUp(801.786,-509.902,-41.2647) --ÏÂÏÂÃæµÄÑ©
+    moveA( 785.245,-490.023,-40.0391 )--è·‘åˆ°ä¸Šé¢ï¼Œåˆ°ä½
+    IfminionsOnUp(801.786,-509.902,-41.2647) --ä¸‹ä¸‹é¢çš„é›ª
     sleep(100)
 end
 
 function main()
     -- body
-    --Ö÷³ÌĞò¿ªÊ¼
-    --´Ó±¾Íâ¿ªÊ¼
-    if IsBuffExist(8326) == 0 then -- Èç¹ûÉíÉÏÃ»ÓĞ´ø×ÅÁé»ê×´Ì¬µÄDebuff
+    --ä¸»ç¨‹åºå¼€å§‹
+    --ä»æœ¬å¤–å¼€å§‹
+    if IsBuffExist(8326) == 0 then -- å¦‚æœèº«ä¸Šæ²¡æœ‰å¸¦ç€çµé­‚çŠ¶æ€çš„Debuff
         
         
-        --Æô¶¯µØµã
+        --å¯åŠ¨åœ°ç‚¹
         roleX,roleY,roleZ = getRolePosition()
-        mapDistance1 = getDistanceBetween(roleX,roleY,-1593.53,3149.39)--Èç¹ûÔÚÂ¯Ê¯
-        if mapDistance1 <= 20 and mapDistance1 >= 0 then --Èç¹ûÔÚÂ¯Ê¯ then
+        mapDistance1 = getDistanceBetween(roleX,roleY,-1593.53,3149.39)--å¦‚æœåœ¨ç‚‰çŸ³
+        if mapDistance1 <= 20 and mapDistance1 >= 0 then --å¦‚æœåœ¨ç‚‰çŸ³ then
             moveA(-1593.53,3149.39,46.4945)
             moveA(-1598.5,3141.34,46.4945)
             moveA(-1612.78,3119.97,45.1597)
@@ -568,14 +568,14 @@ function main()
             moveA(-1662.24,3086.35,30.4154)
             moveA(-1674.99,3079.01,34.38)
             moveA(-1676.36,3076.9,34.5379)
-            ID1,ID2 = getClosetTargetIDFilterName("º£Î¬À­Äá",3,8)
+            ID1,ID2 = getClosetTargetIDFilterName("æµ·ç»´æ‹‰å°¼",3,8)
             contactTarget(ID1,ID2)
-            sleep(1000) --µÈ´ı´ò¿ªĞŞÀí½çÃæ
+            sleep(1000) --ç­‰å¾…æ‰“å¼€ä¿®ç†ç•Œé¢
             useLua("/run RepairAllItems()")
             sleep(11000)
             useLua("/click MerchantFrameCloseButton")
             moveA(-1668.36,3085.98,30.6245)
-            useItem("ËªÀÇàÆ½ĞÕßµÄºÅ½Ç")
+            useItem("éœœç‹¼å—¥å«è€…çš„å·è§’")
             sleep(3500)
             moveA(-1624.11,3102.93,37.9205)
             moveB(-1609.94,3118.17,44.7236)
@@ -609,10 +609,10 @@ function main()
             moveA(-1415.44,2843.4,119.443)
             moveA(-1416.69,2863.6,127.153)
             moveA(-1423.07,2911.94,137.043)
-            moveA(-1422.35,2924.9,136.31)--¿ªÃÅ
+            moveA(-1422.35,2924.9,136.31)--å¼€é—¨
             openGate()
             moveA(-1424.27,2944.92,134.548)
-            castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+            castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
             moveA(-1432.14,2948.61,134.625)
             moveA(-1440.11,2953.03,124.195)
             moveA(-1454.04,2960.03,123.408)
@@ -624,7 +624,7 @@ function main()
             moveA(-1430.46,2982.86,115.737)
             moveA(-1431.61,2973.07,99.9977)
             moveA(-1426.44,2939.17,94.3915)
-            castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+            castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
             moveA(-1384.9,2918.55,92.6443)
             moveA(-1377.68,2885.07,89.279)
             moveA(-1368.45,2857.39,89.1626)
@@ -632,31 +632,31 @@ function main()
             moveA(-1318.76,2891.4,88.7209)
             moveA(-1305.63,2897.74,88.7486)
             moveA(-1293.39,2929.78,88.2552)
-            castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+            castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
             moveA(-1279.51,2920.76,87.9473)
             moveA(-1273.6,2903.67,87.7759)
             moveA(-1209.8,2904.93,86.4382)
-            useLua("/party follow2") --ÈÃĞ¡ºÅ³ö±¾
+            useLua("/party follow2") --è®©å°å·å‡ºæœ¬
             moveA(-1185.54,2881.45,85.9243)
             return 0
         end
 
-        -- ¸±±¾ÄÚË¢¹ÖÁ÷³Ì
-        -- 1.´Ó¸±±¾ÃÅ¿ÚÅÜ½ø¸±±¾(¼ÓÑÓ³ÙµÈ´ı¶ÁÌõ)
-        -- 2.³ÔºÈ-ÉÏbuff-³ÔºÈ
-        -- 3.¿ªÊ¼Õı³£Á÷³Ì-Ë¢ÍêÕû¸ö±¾
+        -- å‰¯æœ¬å†…åˆ·æ€ªæµç¨‹
+        -- 1.ä»å‰¯æœ¬é—¨å£è·‘è¿›å‰¯æœ¬(åŠ å»¶è¿Ÿç­‰å¾…è¯»æ¡)
+        -- 2.åƒå–-ä¸Šbuff-åƒå–
+        -- 3.å¼€å§‹æ­£å¸¸æµç¨‹-åˆ·å®Œæ•´ä¸ªæœ¬
         moveB(-1184.72,2869.68,85.6133)
         waitForLoading()
-        --½ø±¾
+        --è¿›æœ¬
         drink()
         sleep(1000)
-        castSpellA("°ÂÊõÖÇ»Û(µÈ¼¶ 6)")
-        castSpellA("±ù¼×Êõ(µÈ¼¶ 5)")
-        castSpellA("Ä§·¨ÒÖÖÆ(µÈ¼¶ 6)")
+        castSpellA("å¥¥æœ¯æ™ºæ…§(ç­‰çº§ 6)")
+        castSpellA("å†°ç”²æœ¯(ç­‰çº§ 5)")
+        castSpellA("é­”æ³•æŠ‘åˆ¶(ç­‰çº§ 6)")
         drink()
-        --×¼±¸¹¤×÷½áÊø
+        --å‡†å¤‡å·¥ä½œç»“æŸ
 
-        --¿ªÊ¼ÅÜ½øÈ¥
+        --å¼€å§‹è·‘è¿›å»
 
 
         moveA(766.442,-602.741,-32.8828)
@@ -665,8 +665,8 @@ function main()
         moveA(777.184,-543.259,-34.3982)
         moveA(777.37,-535.189,-36.9917)
         moveA(780.281,-520.732,-51.2589)
-        moveA(790.953,-511.759,-52.873)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA(790.953,-511.759,-52.873)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(821.166,-473.698,-55.6676)
         moveA(833.526,-456.154,-56.3205)
         moveA(854.96,-439.599,-55.0072)
@@ -675,28 +675,28 @@ function main()
         moveA(869.143,-367.33,-52.0495)
         moveA(865.139,-360.625,-52.0495)
         moveA(836.539,-339.758,-51.8239)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(809.402,-354.19,-51.5743)
         moveA(790.132,-345.124,-51.1086)
         moveA(783.561,-338.689,-50.2253)
         moveA(768.815,-333.268,-50.6594)
         moveA(758.992,-329.328,-51.4554)
-        moveA(753.248,-335.979,-50.6628)--ÕÒÉÁÏÖµÃÎ»ÖÃ
-        moveA(746.354,-332.894,-50.6383)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA(753.248,-335.979,-50.6628)--æ‰¾é—ªç°å¾—ä½ç½®
+        moveA(746.354,-332.894,-50.6383)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(721.104,-324.517,-51.0716)
         moveA(676.94,-323.676,-52.1575)
         moveA(657.654,-324.968,-52.0193)
         moveA(655.183,-319.311,-52.0193)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(649.669,-303.409,-52.2289)
         moveA(646.332,-286.629,-52.5106)
     
         moveA(646.898,-271.447,-52.9334)
-        moveA(655.024,-259.309,-53.1231)--ÕÒ½Ç¶ÈÌø
-        --moveA(663.822,-251.164,-61.5678)--Ìø½øÊ÷×´
+        moveA(655.024,-259.309,-53.1231)--æ‰¾è§’åº¦è·³
+        --moveA(663.822,-251.164,-61.5678)--è·³è¿›æ ‘çŠ¶
         jumpToRoof()
-        moveA(663.822,-251.164,-61.5678)--Ìø³öÊ÷×´--ĞèÒªĞ´Ìø¹¦ÄÜ
+        moveA(663.822,-251.164,-61.5678)--è·³å‡ºæ ‘çŠ¶--éœ€è¦å†™è·³åŠŸèƒ½
         jumpOutOfRoof()
 
         moveA(670.561,-237.287,-64.3912)
@@ -709,7 +709,7 @@ function main()
         moveA(686.386,-255.668,-53.0724)
         moveA(692.152,-256.344,-53.0522)
         moveA(692.917,-245.03,-50.6985)
-        castSpellB("ÉÁÏÖÊõ")
+        castSpellB("é—ªç°æœ¯")
         moveA(692.948,-217.107,-47.2734)
         moveA(693.489,-193.723,-47.3674)
         moveA(693.796,-181.201,-48.2032)
@@ -721,346 +721,346 @@ function main()
         moveA(613.331,-145.961,-54.7729)
         drink()
         sleep(1000)
-        castSpellA("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellA("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
     --]]
-        --¿ªÊ¼À­¹Ö
+        --å¼€å§‹æ‹‰æ€ª
         moveA(623.581,-128.318,-55.0712)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
         moveA(629.351,-110.456,-55.8588)
         moveA(639.728,-105.574,-56.3244)
         moveA(655.715,-108.508,-56.3868)
         moveA(673.29,-111.579,-56.0673)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
         moveA(688.726,-106.921,-56.3194)
         moveA(710.253,-99.9785,-56.172)
         moveA(725.49,-99.503,-56.4771)
         moveA(749.734,-95.6281,-57.4667)
         moveA(759.19,-97.6381,-56.4076)
-        castSpellB("·¨Á¦»¤¶Ü(µÈ¼¶ 7)")
+        castSpellB("æ³•åŠ›æŠ¤ç›¾(ç­‰çº§ 7)")
         moveA(776.323,-87.0245,-57.008)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         
         moveA(783.177,-84.505,-57.1724)
-        moveA(785.5,-83.9169,-57.1166)--ÌøĞüÑÂ
+        moveA(785.5,-83.9169,-57.1166)--è·³æ‚¬å´–
         jumpCliff()
-        moveA(825.049,-49.5479,-88.2676)--±©·çÑ©×îÀïÃæÈíÄà
-        sleep(8000)--µÈ´ıÉÁÏÖCD
-        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+        moveA(825.049,-49.5479,-88.2676)--æš´é£é›ªæœ€é‡Œé¢è½¯æ³¥
+        sleep(8000)--ç­‰å¾…é—ªç°CD
+        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
         sleep(5)
         castSpellPosition(830.5,-18.5,-87.0)
         sleep(1400)
-        moveA(825.049,-49.5479,-88.2676)--±ùÇ¹ÅÔ±ß´ó¹Ö1
+        moveA(825.049,-49.5479,-88.2676)--å†°æªæ—è¾¹å¤§æ€ª1
         useIceLance(813.9,-37.7)
         sleep(100)
-        moveA(832.91,-67.2618,-87.3565)--±ùÇ¹´ó¹Ö2
+        moveA(832.91,-67.2618,-87.3565)--å†°æªå¤§æ€ª2
         useIceLance(830.3,-99)
-        moveA(841.87,-84.1939,-87.3714)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
-        moveA(860.082,-122.639,-88.4306)--±ù»·
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
-        moveA(858.232,-142.909,-88.2912)--±ùÇ¹´ó¹Ö3
+        moveA(841.87,-84.1939,-87.3714)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
+        moveA(860.082,-122.639,-88.4306)--å†°ç¯
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
+        moveA(858.232,-142.909,-88.2912)--å†°æªå¤§æ€ª3
         useIceLance(841.8,-143.4)
-        moveA(859.692,-163.132,-86.8345)--±ùÇ¹´ó¹Ö4
+        moveA(859.692,-163.132,-86.8345)--å†°æªå¤§æ€ª4
         useIceLance(840,-177.2)
-        moveA(860.89,-175.798,-86.6028)--¿ªÊ¼ÏòÉÏ×ß
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        moveA(860.89,-175.798,-86.6028)--å¼€å§‹å‘ä¸Šèµ°
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(858.654,-188.322,-82.8178)
-        castSpellB("·¨Á¦»¤¶Ü(µÈ¼¶ 7)")
+        castSpellB("æ³•åŠ›æŠ¤ç›¾(ç­‰çº§ 7)")
         moveA(848.386,-194.911,-77.2909)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        moveA(821.74,-207,-77.1483)--Â·¹ıÒ»²¨ÈíÄà£¬À­Ò»²¨ÈíÄà
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        moveA(821.74,-207,-77.1483)--è·¯è¿‡ä¸€æ³¢è½¯æ³¥ï¼Œæ‹‰ä¸€æ³¢è½¯æ³¥
         useIceLance(815,-231.9)
         moveA(794.545,-189.607,-76.8009)
         sheildAndAttact()
         moveA(784.75,-187.257,-72.8342)
         sheildAndAttact()
-        moveA(771.136,-211.279,-65.2178)--±ù»·ÈíÄà
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
+        moveA(771.136,-211.279,-65.2178)--å†°ç¯è½¯æ³¥
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
         moveA(764.8,-192.369,-60.9019)
         sheildAndAttact()
         moveA(771.546,-175.597,-57.3276)
         sheildAndAttact()
         moveA(776.7,-169.075,-56.4945)
-        moveA(776,-160.402,-56.2427)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA(776,-160.402,-56.2427)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(769.705,-129.117,-56.4918)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        moveA(761.883,-115.367,-57.5583)--°Â±¬À­ÓÒ±ßµ¥Ö»´ó¹Ö
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        moveA(761.883,-115.367,-57.5583)--å¥¥çˆ†æ‹‰å³è¾¹å•åªå¤§æ€ª
         sheildAndAttact()
-        moveA(753.443,-98.0904,-57.4589)--·´ÖÆ×ó±ßµÄ¹ÖÈº
-        silence("¸¯ÀÃÆÛÆ­Õß",736.478,-102.708)
-        moveA(743.993,-90.8413,-57.4886 )--°Â±¬À­ÓÒ±ßµ¥Ö»´ó¹Ö
+        moveA(753.443,-98.0904,-57.4589)--ååˆ¶å·¦è¾¹çš„æ€ªç¾¤
+        silence("è…çƒ‚æ¬ºéª—è€…",736.478,-102.708)
+        moveA(743.993,-90.8413,-57.4886 )--å¥¥çˆ†æ‹‰å³è¾¹å•åªå¤§æ€ª
         sheildAndAttact()
-        moveA(736.154,-85.0157,-57.4987)--±ùÇ¹ÓÒ±ßµÄ¹ÖÈº
+        moveA(736.154,-85.0157,-57.4987)--å†°æªå³è¾¹çš„æ€ªç¾¤
         useIceLance(742.673,-54.7007)
-        moveA(721.895,-86.0367,-57.3896 )--±ù»·
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
+        moveA(721.895,-86.0367,-57.3896 )--å†°ç¯
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
         moveA( 691.054,-93.5874,-57.4999 )
         sheildAndAttact()
         moveA( 678.527,-94.955,-57.4999 )
         moveA( 673.348,-93.8668,-57.4999 )
-        castSpellB("ÉÁÏÖÊõ")
+        castSpellB("é—ªç°æœ¯")
         moveA( 652.662,-90.1613,-57.5 )
         sheildAndAttact()
         moveA( 640.951,-93.1431,-57.5 )
         sheildAndAttact()
-        moveA( 630.754,-98.6693,-57.5 )--À­×îºóÒ»¸ö´ó¹Ö
+        moveA( 630.754,-98.6693,-57.5 )--æ‹‰æœ€åä¸€ä¸ªå¤§æ€ª
         useIceLance(599.141,-97.2168)
         moveA( 621.781,-125.973,-55.3767 )
-        castSpellB("ÉÁÏÖÊõ")
+        castSpellB("é—ªç°æœ¯")
         moveA( 619.455,-148.199,-54.1899 )
         sheildAndAttact()
         moveA( 622.765,-165.128,-54.3625 )
         sheildAndAttact()
         moveA( 626.057,-181.039,-53.6834 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 625.273,-185.368,-53.5531 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 625.346,-197.517,-64.6238 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(641.827,-229.465,-58.639)
-        moveA(641.827,-229.465,-58.639)--µÈ´ı¹ÖÎïµ½Î»ÖÃ²¢±©·çÑ©¾Û¹Ö
+        moveA(641.827,-229.465,-58.639)--ç­‰å¾…æ€ªç‰©åˆ°ä½ç½®å¹¶æš´é£é›ªèšæ€ª
         ifMnionsUnderFloor(673.507,-229.911,-58.4701 )
         moveA( 639.272,-240.605,-54.6394 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 643.182,-272.101,-53.0335 )
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
         moveA( 645.91,-293.822,-52.2885 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 649.741,-308.451,-52.065 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 656.812,-329.865,-52.0193 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 681.028,-324.901,-52.0826 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 704.996,-325.403,-52.0193 )
-        castSpellA("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
-        --sleep(4500)--ÉÔÎ¢µÈ´ıÒ»»áºóÃæµÄ¹Ö
+        castSpellA("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
+        --sleep(4500)--ç¨å¾®ç­‰å¾…ä¸€ä¼šåé¢çš„æ€ª
         moveA( 725.189,-336.197,-50.89 )
-        moveA( 754.778,-347.795,-50.6642 )--×¼ßÂÌø½øË®³Ø
-        --castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
+        moveA( 754.778,-347.795,-50.6642 )--å‡†å‘—è·³è¿›æ°´æ± 
+        --castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
         moveA( 765.858,-362.168,-61.6051 )
         moveA( 778.281,-363.594,-61.26 )
-        moveA( 784.168,-373.137,-58.8658 )--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA( 784.168,-373.137,-58.8658 )--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA( 801.011,-400.901,-58.5811 )
         moveA( 802.577,-416.652,-54.0869 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 803.105,-432.26,-54.0057 )
         moveA( 813.381,-442.953,-55.8821 )
         moveA( 824.436,-460.669,-56.3285 )
         moveA( 818.593,-474.918,-55.5525 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 814.184,-485.161,-54.9225 )
-        moveA( 808.707,-490.535,-54.4575 )--ÔÙ´ÎÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA( 808.707,-490.535,-54.4575 )--å†æ¬¡é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA( 780.103,-514.917,-52.7517 )
         moveA( 777.814,-519.964,-52.0938 )
-        moveA( 783.307,-526.224,-48.7376 )--¿ªÊ¼ÉÏÂ¥
+        moveA( 783.307,-526.224,-48.7376 )--å¼€å§‹ä¸Šæ¥¼
         moveA( 786.844,-530.203,-47.3358 )
         moveA( 804.177,-514.334,-41.5158 )
         moveA( 803.296,-505.85,-40.8348 )
         moveA( 797.714,-496.423,-39.8921 )
         moveA( 786.592,-492.281,-39.9295 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        moveA( 784.072,-491.122,-40.0587 ) --µÈ´ı¹ÖÎïµ½´ïÏÂÑ©¾Û¹Ö
-        sleep(100)--Õ¾¶¨
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        moveA( 784.072,-491.122,-40.0587 ) --ç­‰å¾…æ€ªç‰©åˆ°è¾¾ä¸‹é›ªèšæ€ª
+        sleep(100)--ç«™å®š
         ifMnionsInposition2(784.153,-523.619,-49.8221)
-        prints("µÚÒ»²¨½áÊø")
-        firstLevelStorm(793.425,-521.604,-46.3805)--¿ªÊ¼ÏÂÑ©À­µÚÒ»²¨
-        prints("µÚ¶ş²¨½áÊø")
-        moveA(782.117,-490.628,-40.1348) --¿ªÊ¼ÏÂÑ©À­µÚ¶ş²¨
-        sleep(100)--Õ¾¶¨
-        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+        prints("ç¬¬ä¸€æ³¢ç»“æŸ")
+        firstLevelStorm(793.425,-521.604,-46.3805)--å¼€å§‹ä¸‹é›ªæ‹‰ç¬¬ä¸€æ³¢
+        prints("ç¬¬äºŒæ³¢ç»“æŸ")
+        moveA(782.117,-490.628,-40.1348) --å¼€å§‹ä¸‹é›ªæ‹‰ç¬¬äºŒæ³¢
+        sleep(100)--ç«™å®š
+        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
         sleep(5)
         castSpellPosition(808.046,-494.3,-39.8185)
         sleep(1400)
-        prints("µÚÈı²¨½áÊø")
-        moveA(767.287,-472.172,-41.0156)--±ù»· À­×ª½»
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
+        prints("ç¬¬ä¸‰æ³¢ç»“æŸ")
+        moveA(767.287,-472.172,-41.0156)--å†°ç¯ æ‹‰è½¬äº¤
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
         moveA(741.764,-471.454,-39.2254)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
         moveA(719.241,-485.206,-39.285)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
-        moveA(722.436,-499.037,-37.0019)--Ä§±¬À­Ì¨×ÓÉÏµÄ¹Ö
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
+        moveA(722.436,-499.037,-37.0019)--é­”çˆ†æ‹‰å°å­ä¸Šçš„æ€ª
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
         moveA(735.659,-518.188,-41.3001)
-        moveA(736.892,-520.391,-41.0172)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA(736.892,-520.391,-41.0172)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(753.194,-542.314,-32.4506)
-        moveA(767.323,-538.553,-37.0245)--ÉÏ¶Ü
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        moveA(776.547,-534.835,-37.2068)--ÏÂÑ©¾Û¹Ö1
-        sleep(100)--Õ¾¶¨
+        moveA(767.323,-538.553,-37.0245)--ä¸Šç›¾
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        moveA(776.547,-534.835,-37.2068)--ä¸‹é›ªèšæ€ª1
+        sleep(100)--ç«™å®š
         firstLevelStormGathered(754.832,-551.524,-32.945)
-        moveA(776.547,-534.835,-37.2068)--ÏÂÑ©¾Û¹Ö2
-        sleep(100)--Õ¾¶¨
+        moveA(776.547,-534.835,-37.2068)--ä¸‹é›ªèšæ€ª2
+        sleep(100)--ç«™å®š
         firstLevelStormGathered(760.533,-549.265,-34.8131)
-        moveA(778.142,-525.02,-50.483)--ÌøÏÂÈ¥   ½×¶ÎÒ»½áÊø
+        moveA(778.142,-525.02,-50.483)--è·³ä¸‹å»   é˜¶æ®µä¸€ç»“æŸ
         moveA(792.853,-507.129,-53.0403)
-        castSpellB("ÉÁÏÖÊõ")
+        castSpellB("é—ªç°æœ¯")
         moveA(812.225,-479.004,-55.0021)
         moveA(821.538,-452.924,-56.337)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
         moveA(798.955,-419.685,-53.7322)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(802.515,-400.032,-58.6444)
-        moveA(787.139,-377.238,-59.1098)--¿ªÊ¼À­Ë®³Ø4¸öÊ÷ÈË µÚÒ»¸ö
+        moveA(787.139,-377.238,-59.1098)--å¼€å§‹æ‹‰æ°´æ± 4ä¸ªæ ‘äºº ç¬¬ä¸€ä¸ª
         useIceLance(771.501,-351.257)
         moveA(804.305,-389.964,-59.0486)
-        moveA(825.202,-389.742,-59.2684)--µÚ¶ş¸öÊ÷ÈË
+        moveA(825.202,-389.742,-59.2684)--ç¬¬äºŒä¸ªæ ‘äºº
         useIceLance(857.463,-383.13)
         moveA(812.014,-393.333,-59.0163)
-        moveA(812.569,-389.407,-59.0676)--×ªÍ·
-        moveA(812.569,-389.407,-59.0676)--µÚËÄ¸öÊ÷ÈË
+        moveA(812.569,-389.407,-59.0676)--è½¬å¤´
+        moveA(812.569,-389.407,-59.0676)--ç¬¬å››ä¸ªæ ‘äºº
         useIceLance(813.441,-380.424) 
-        moveA(796.75,-421.218,-53.6791)--×ª½Ç±ù»·
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
-        moveA(798.488,-439.827,-53.6355)--Ãé×¼ÉÁÏÖÎ»ÖÃ
-        moveA(803.303,-439.802,-54.4097)--ÉÁÏÖ³ö³Ø×Ó--µÚ¶ş½×¶Î½áÊø
-        castSpellB("ÉÁÏÖÊõ")
-        moveA(836.503,-437.471,-55.996)--Ô¤Áô À­Ñ²ÂßµÄÊ÷ÈË
-        silence("Éî¸¯¼ùÌ¤Õß",841.768,-439.631)
-        moveA(867.206,-409.006,-52.2189)--À­ÓÒ±ß¿¿±ßµÄ¹ÖÈº
+        moveA(796.75,-421.218,-53.6791)--è½¬è§’å†°ç¯
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
+        moveA(798.488,-439.827,-53.6355)--ç„å‡†é—ªç°ä½ç½®
+        moveA(803.303,-439.802,-54.4097)--é—ªç°å‡ºæ± å­--ç¬¬äºŒé˜¶æ®µç»“æŸ
+        castSpellB("é—ªç°æœ¯")
+        moveA(836.503,-437.471,-55.996)--é¢„ç•™ æ‹‰å·¡é€»çš„æ ‘äºº
+        silence("æ·±è…è·µè¸è€…",841.768,-439.631)
+        moveA(867.206,-409.006,-52.2189)--æ‹‰å³è¾¹é è¾¹çš„æ€ªç¾¤
         useIceLance(892.859,-406.672)
         moveA(874.502,-394.766,-52.0473)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
         moveA(877.021,-384.893,-52.0495)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(871.591,-363.741,-52.0495)
-        moveA(858.472,-331.439,-51.2743)--±ù»·×¼±¸»ØÍ·ÉÁÏÖ
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
-        moveA(850.015,-330.53,-51.6793)--Ãé×¼ÉÁÏÖµã
-        moveA(844.359,-332.608,-51.6555)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA(858.472,-331.439,-51.2743)--å†°ç¯å‡†å¤‡å›å¤´é—ªç°
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
+        moveA(850.015,-330.53,-51.6793)--ç„å‡†é—ªç°ç‚¹
+        moveA(844.359,-332.608,-51.6555)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(817.67,-344.514,-51.6009)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(768.905,-332.863,-50.6498)
 
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(759.263,-329.948,-51.4271)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(735.878,-335.948,-50.795 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        --moveA(729.465,-331.519,-50.8566)--Í¨¹ıÖĞ¼äµÄÊØÃÅ¹Ö
-        --castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        moveA(714.104,-329.912,-51.7039)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        --moveA(729.465,-331.519,-50.8566)--é€šè¿‡ä¸­é—´çš„å®ˆé—¨æ€ª
+        --castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        moveA(714.104,-329.912,-51.7039)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(664.93,-325.324,-52.0982)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(654.922,-324.14,-52.0206)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(649.427,-308.906,-52.0568)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(645.282,-283.686,-52.749)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(649.613,-256.917,-53.1355)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
-        moveA(652.066,-242.901,-64.3912)--ÌøÏÂÈ¥
-        moveA(652.077,-239.998,-64.3912)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
-        moveA(656.428,-205.56,-64.3912)--¿ªÊ¼ÉÏÂ¥Ìİ
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")--ÉÏ¶Ü
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
+        moveA(652.066,-242.901,-64.3912)--è·³ä¸‹å»
+        moveA(652.077,-239.998,-64.3912)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
+        moveA(656.428,-205.56,-64.3912)--å¼€å§‹ä¸Šæ¥¼æ¢¯
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")--ä¸Šç›¾
         moveA(666.893,-206.992,-62.0006)
-        moveA(673.21,-210.906,-59.9417)--¾Û¹Ö±©·çÑ©1
-        sleep(100)--Õ¾¶¨
+        moveA(673.21,-210.906,-59.9417)--èšæ€ªæš´é£é›ª1
+        sleep(100)--ç«™å®š
         firstLevelStormGathered(642.881,-215.817,-62.823)
-        moveA(673.21,-210.906,-59.9417)--¾Û¹Ö±©·çÑ©2
-        sleep(100)--Õ¾¶¨
+        moveA(673.21,-210.906,-59.9417)--èšæ€ªæš´é£é›ª2
+        sleep(100)--ç«™å®š
         firstLevelStormGathered(650.208,-209.687,-64.3911)
-        moveA(678.056,-217.342,-60.3896)--À­Â¥ÌİµÚÒ»²¨¹Ö
-        silence("¸¯ÀÃÆÛÆ­Õß",681.145,-197.491)
-        moveA(677.268,-222.061,-60.246)--±ùÇ¹À­Â¥ÌİÏÂÃæµÄÊ÷ÈË
+        moveA(678.056,-217.342,-60.3896)--æ‹‰æ¥¼æ¢¯ç¬¬ä¸€æ³¢æ€ª
+        silence("è…çƒ‚æ¬ºéª—è€…",681.145,-197.491)
+        moveA(677.268,-222.061,-60.246)--å†°æªæ‹‰æ¥¼æ¢¯ä¸‹é¢çš„æ ‘äºº
         useIceLance(661.249,-239.234)
-        moveA(685.938,-250.545,-53.6692)--±ùÇ¹À­Â¥ÌİÖĞ¼äµÄÊ÷ÈË
+        moveA(685.938,-250.545,-53.6692)--å†°æªæ‹‰æ¥¼æ¢¯ä¸­é—´çš„æ ‘äºº
         useIceLance(694.761,-263.327)
         moveA(688.937,-257.203,-53.0614)
         moveA(694.959,-253.06,-53.0483)
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(702.9,-230.672,-47.2944)
-        moveA(711.079,-213.505,-47.2549)--±ù»·
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
-        moveA(703.631,-202.34,-47.263)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
-        moveA(689.246,-177.685,-48.7797)--¿ªÊ¼À­Â·ÉÏµÄÊ÷ÈËÒ»
+        moveA(711.079,-213.505,-47.2549)--å†°ç¯
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
+        moveA(703.631,-202.34,-47.263)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
+        moveA(689.246,-177.685,-48.7797)--å¼€å§‹æ‹‰è·¯ä¸Šçš„æ ‘äººä¸€
         useIceLance(688.793,-168.918)
-        moveA(660.534,-159.642,-51.1787)--Ê÷ÈË¶ş
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
-        moveA(647.676,-162.747,-52.517)--Ê÷ÈËÈı
+        moveA(660.534,-159.642,-51.1787)--æ ‘äººäºŒ
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
+        moveA(647.676,-162.747,-52.517)--æ ‘äººä¸‰
         useIceLance(641.854,-160.727)
-        moveA(631.603,-168.926,-53.7333)--À­Í¨ÍùÆÙ²¼¿Ú×îÀïÃæµÄÈøÌØ
+        moveA(631.603,-168.926,-53.7333)--æ‹‰é€šå¾€ç€‘å¸ƒå£æœ€é‡Œé¢çš„è¨ç‰¹
         useIceLance(606.295,-157.426)
-        moveA(625.025,-182.839,-53.6634)--×ßµ½ĞüÑÂ±ß
+        moveA(625.025,-182.839,-53.6634)--èµ°åˆ°æ‚¬å´–è¾¹
         moveA(627.478,-199.195,-64.569)
-        moveA(628.846,-201.469,-64.5882)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
-        moveA(641.827,-229.465,-58.639)--Ì×¶Ü
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        moveA(628.846,-201.469,-64.5882)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
+        moveA(641.827,-229.465,-58.639)--å¥—ç›¾
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA(641.827,-229.465,-58.639)
         moveA(641.827,-229.465,-58.639)
         moveA(638.609,-241.109,-54.4201)
         moveA(640.68,-263.291,-52.8539)
-        moveA(641.435,-270.427,-53.0548)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA(641.435,-270.427,-53.0548)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA(647.938,-300.566,-52.2961)
         moveA(653.984,-324.36,-52.0354)
         moveA(655.942,-332.851,-52.0354)
         moveA(626.167,-354.295,-52.0354)
-        moveA(613.903,-365.727,-52.0354)--¿ªÊ¼À­ÀïÃæµÄÁ½²¦ÈøÌØÒ»
-        sleep(100)--Õ¾¶¨
-        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+        moveA(613.903,-365.727,-52.0354)--å¼€å§‹æ‹‰é‡Œé¢çš„ä¸¤æ‹¨è¨ç‰¹ä¸€
+        sleep(100)--ç«™å®š
+        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
         sleep(5)
         castSpellPosition(607.193,-398.257,-52.0194)
         sleep(1400)
-        moveA(612.845,-367.745,-52.0193)--ÈøÌØ¶ş
-        sleep(100)--Õ¾¶¨
-        castSpellB("±©·çÑ©(µÈ¼¶ 1)")
+        moveA(612.845,-367.745,-52.0193)--è¨ç‰¹äºŒ
+        sleep(100)--ç«™å®š
+        castSpellB("æš´é£é›ª(ç­‰çº§ 1)")
         sleep(5)
         castSpellPosition(586.075,-385.67,-52.0193)
         sleep(1400)
         moveA(622.279,-354.574,-52.0193)
-        castSpellB("Ä§±¬Êõ(µÈ¼¶ 1)")
-        moveA(631.482,-354.39,-52.0193)--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        castSpellB("é­”çˆ†æœ¯(ç­‰çº§ 1)")
+        moveA(631.482,-354.39,-52.0193)--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         sleep(400)
-        moveA( 675.554,-358.788,-51.6527 )--À­ÓÒ±ßµÄÊ÷ÈË
+        moveA( 675.554,-358.788,-51.6527 )--æ‹‰å³è¾¹çš„æ ‘äºº
         useIceLance(679.262,-373.467)
-        moveA( 688.797,-350.001,-51.4984 )--±ù»·
-        castSpellB("±ùËªĞÂĞÇ(µÈ¼¶ 1)")
+        moveA( 688.797,-350.001,-51.4984 )--å†°ç¯
+        castSpellB("å†°éœœæ–°æ˜Ÿ(ç­‰çº§ 1)")
         moveA( 725.189,-336.197,-50.89 )
         --sleep(500)
-        moveA( 754.778,-347.795,-50.6642 )--Ìø½øË®³Ø
-        moveA( 768.612,-356.793,-61.6126 )--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA( 754.778,-347.795,-50.6642 )--è·³è¿›æ°´æ± 
+        moveA( 768.612,-356.793,-61.6126 )--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA( 794.636,-385.743,-59.0356 )
         moveA( 801.067,-419.93,-53.6133 )
         moveA( 803.727,-435.677,-54.2975 )
-        castSpellB("·¨Ê¦»¤¼×(µÈ¼¶ 4)")
+        castSpellB("æ³•å¸ˆæŠ¤ç”²(ç­‰çº§ 4)")
         moveA( 818.87,-447.867,-56.251 )
         moveA( 822.923,-460.974,-56.2987 )
-        moveA( 816.962,-474.017,-55.551 )--ÉÁÏÖ
-        castSpellB("ÉÁÏÖÊõ")
+        moveA( 816.962,-474.017,-55.551 )--é—ªç°
+        castSpellB("é—ªç°æœ¯")
         moveA( 783.925,-511.539,-52.9447 )
         moveA( 777.5,-517.775,-52.7455 )
-        castSpellB("Ä§·¨ÒÖÖÆ(µÈ¼¶ 6)")
+        castSpellB("é­”æ³•æŠ‘åˆ¶(ç­‰çº§ 6)")
         moveA( 783.952,-526.325,-48.5291 )
         moveA( 798.981,-523.246,-43.9313 )
         moveA( 804.008,-508.463,-41.094 )
-        castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+        castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
         moveA( 796.865,-496.747,-39.9199 )
-        useItem("×ÔÈ»·À»¤Ò©Ë®")
-        moveA( 784.901,-489.862,-40.0656 )--×¼±¸¿ªÊ¼A¹Ö£¬¼ì²âÑªÁ¿²¢ÅĞ¶Ï¹ÖÎïÊÇ·ñµ½´ïÎ»ÖÃ
+        useItem("è‡ªç„¶é˜²æŠ¤è¯æ°´")
+        moveA( 784.901,-489.862,-40.0656 )--å‡†å¤‡å¼€å§‹Aæ€ªï¼Œæ£€æµ‹è¡€é‡å¹¶åˆ¤æ–­æ€ªç‰©æ˜¯å¦åˆ°è¾¾ä½ç½®
         sleep(100)
-        ifMnionsInposition(784.153,-523.619,-49.8221)--µ½Î»
-        maxLevelStorm(793.425,-521.604,-46.3805)--Âú¼¶Ñ©1
+        ifMnionsInposition(784.153,-523.619,-49.8221)--åˆ°ä½
+        maxLevelStorm(793.425,-521.604,-46.3805)--æ»¡çº§é›ª1
         sleep(100)
-        maxLevelStorm(801.128,-513.809,-41.952)--Âú¼¶Ñ©2
+        maxLevelStorm(801.128,-513.809,-41.952)--æ»¡çº§é›ª2
     --]]
         for i = 1, 30 do
             flag1 = getRoleflag1()
-            if  flag1 == 0x08 then --ÔÚÕ½¶·ÖĞ¾ÍÑ­»·Õ½¶·
+            if  flag1 == 0x08 then --åœ¨æˆ˜æ–—ä¸­å°±å¾ªç¯æˆ˜æ–—
                 battle()
-            elseif flag1 == 0 then --ÍÑÕ½ÁË¾ÍÌø³ö
+            elseif flag1 == 0 then --è„±æˆ˜äº†å°±è·³å‡º
                 break
             end
         end
@@ -1069,12 +1069,12 @@ function main()
 
 
 
-        unusedBag = getUnusedAllBagSlotNum()--»ñµÃ±³°üÊ£ÓàµÄ¸ñ×ÓÊıÄ¿
+        unusedBag = getUnusedAllBagSlotNum()--è·å¾—èƒŒåŒ…å‰©ä½™çš„æ ¼å­æ•°ç›®
         headDuration = getEquipementDurationBySlotNum(1)
-        if unusedBag >= 15 and headDuration >= 10 then --Èç¹û×°±¸²»ºì£¬±³°üÃ»Âú£¬¾Í³ö±¾¼ÌĞø
-            -- 4. ³ö±¾Á÷³Ì(¼ÓÑÓ³ÙµÈ´ı¶ÁÌõ)
-            -- 5. ÖØÖÃ¸±±¾
-            -- 6. ÕâÑù¹¹³ÉÒ»¸öÑ­»·
+        if unusedBag >= 19 and headDuration >= 10 then --å¦‚æœè£…å¤‡ä¸çº¢ï¼ŒèƒŒåŒ…æ²¡æ»¡ï¼Œå°±å‡ºæœ¬ç»§ç»­
+            -- 4. å‡ºæœ¬æµç¨‹(åŠ å»¶è¿Ÿç­‰å¾…è¯»æ¡)
+            -- 5. é‡ç½®å‰¯æœ¬
+            -- 6. è¿™æ ·æ„æˆä¸€ä¸ªå¾ªç¯
             
             moveA(779.865,-514.355,-52.7574) --1
             pickUp(779.865,-514.355,-52.7574)
@@ -1114,30 +1114,30 @@ function main()
             moveA(740.779,-469.176,-39.2228)
             moveA(733.329,-475.261,-40.795)
             moveA(734.655,-489.248,-41.1003)
-            castSpellB("ÉÁÏÖÊõ")
+            castSpellB("é—ªç°æœ¯")
             moveA(741.051,-527.271,-37.03)
             moveA(753.944,-552.429,-32.987)
             moveA(780.982,-571.218,-32.9624)
             moveA(798.754,-596.429,-32.4338)
             moveA(791.282,-599.179,-32.5302)
             moveA(779.969,-601.641,-32.4332)
-            castSpellB("ÉÁÏÖÊõ")
+            castSpellB("é—ªç°æœ¯")
             moveA(754.719,-610.007,-32.9982)
-            useLua("/party follow2") --ÈÃĞ¡ºÅ³ö±¾
+            useLua("/party follow2") --è®©å°å·å‡ºæœ¬
             moveB(754.893,-628.817,-32.774)
             waitForLoading()
-            useLua("/run ResetInstances()") --ÖØÖÃ
+            useLua("/run ResetInstances()") --é‡ç½®
 
 
-        elseif unusedBag <= 14 or headDuration <= 10 then --Èç¹û×°±¸ºìÁË»òÕß±³°üÂúÁË»Ø³ÇĞŞÀí
-            if unusedBag ~= -1 and headDuration ~= -1 then  --ÔÙ´ÎÑéÖ¤Êı¾İÊÇ·ñ³É¹¦
-                -- 4. Â¯Ê¯(¼ÓÑÓ³ÙµÈ´ı¶ÁÌõÓëÀ¶Ìõ¼ÓÔØ20s×óÓÒ)
-                -- 5. ÖØÖÃ¸±±¾
-                -- 6. Ç°ÍùÓÊÏä¼ÄĞÅ¹ı³Ì
-                -- 7. Ç°ÍùĞŞÀíÉÌÈËĞŞÀí¹ı³Ì
-                -- 8. »ØÈ¥¸±±¾ÃÅ¿Ú¹ı³Ì
-                -- 9. ÖØÖÃ¸±±¾
-                -- 10. ÕâÑù¹¹³ÉÒ»¸öÑ­»·
+        elseif unusedBag <= 19 or headDuration <= 10 then --å¦‚æœè£…å¤‡çº¢äº†æˆ–è€…èƒŒåŒ…æ»¡äº†å›åŸä¿®ç†
+            if unusedBag ~= -1 and headDuration ~= -1 then  --å†æ¬¡éªŒè¯æ•°æ®æ˜¯å¦æˆåŠŸ
+                -- 4. ç‚‰çŸ³(åŠ å»¶è¿Ÿç­‰å¾…è¯»æ¡ä¸è“æ¡åŠ è½½20så·¦å³)
+                -- 5. é‡ç½®å‰¯æœ¬
+                -- 6. å‰å¾€é‚®ç®±å¯„ä¿¡è¿‡ç¨‹
+                -- 7. å‰å¾€ä¿®ç†å•†äººä¿®ç†è¿‡ç¨‹
+                -- 8. å›å»å‰¯æœ¬é—¨å£è¿‡ç¨‹
+                -- 9. é‡ç½®å‰¯æœ¬
+                -- 10. è¿™æ ·æ„æˆä¸€ä¸ªå¾ªç¯
 
                 moveA(779.865,-514.355,-52.7574) --1
                 pickUp(779.865,-514.355,-52.7574)
@@ -1171,8 +1171,8 @@ function main()
                 pickUp(806.339,-505.818,-40.9462)   
                 moveA(806.339,-505.818,-40.9462)--4
                 sleep(3000)
-                useItem("Â¯Ê¯")
-                waitForLoading()--µÈ´ı¶ÁÌõ ºÍ ¼ÓÔØÀ¶Ìõ½áÊø
+                useItem("ç‚‰çŸ³")
+                waitForLoading()--ç­‰å¾…è¯»æ¡ å’Œ åŠ è½½è“æ¡ç»“æŸ
                 moveA(-1593.53,3149.39,46.4945)
                 moveA(-1598.5,3141.34,46.4945)
                 moveA(-1612.78,3119.97,45.1597)
@@ -1181,14 +1181,14 @@ function main()
                 moveA(-1662.24,3086.35,30.4154)
                 moveA(-1674.99,3079.01,34.38)
                 moveA(-1676.36,3076.9,34.5379)
-                ID1,ID2 = getClosetTargetIDFilterName("º£Î¬À­Äá",3,8)
+                ID1,ID2 = getClosetTargetIDFilterName("æµ·ç»´æ‹‰å°¼",3,8)
                 contactTarget(ID1,ID2)
-                sleep(1000) --µÈ´ı´ò¿ªĞŞÀí½çÃæ
+                sleep(1000) --ç­‰å¾…æ‰“å¼€ä¿®ç†ç•Œé¢
                 useLua("/run RepairAllItems()")
                 sleep(11000)
                 useLua("/click MerchantFrameCloseButton")
                 moveA(-1668.36,3085.98,30.6245)
-                useItem("ËªÀÇàÆ½ĞÕßµÄºÅ½Ç")
+                useItem("éœœç‹¼å—¥å«è€…çš„å·è§’")
                 sleep(3500)
                 moveA(-1624.11,3102.93,37.9205)
                 moveB(-1609.94,3118.17,44.7236)
@@ -1222,10 +1222,10 @@ function main()
                 moveA(-1415.44,2843.4,119.443)
                 moveA(-1416.69,2863.6,127.153)
                 moveA(-1423.07,2911.94,137.043)
-                moveA(-1422.35,2924.9,136.31)--¿ªÃÅ
+                moveA(-1422.35,2924.9,136.31)--å¼€é—¨
                 openGate()
                 moveA(-1424.27,2944.92,134.548)
-                castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+                castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
                 moveA(-1432.14,2948.61,134.625)
                 moveA(-1440.11,2953.03,124.195)
                 moveA(-1454.04,2960.03,123.408)
@@ -1237,7 +1237,7 @@ function main()
                 moveA(-1430.46,2982.86,115.737)
                 moveA(-1431.61,2973.07,99.9977)
                 moveA(-1426.44,2939.17,94.3915)
-                castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+                castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
                 moveA(-1384.9,2918.55,92.6443)
                 moveA(-1377.68,2885.07,89.279)
                 moveA(-1368.45,2857.39,89.1626)
@@ -1245,20 +1245,20 @@ function main()
                 moveA(-1318.76,2891.4,88.7209)
                 moveA(-1305.63,2897.74,88.7486)
                 moveA(-1293.39,2929.78,88.2552)
-                castSpellB("º®±ù»¤Ìå(µÈ¼¶ 6)")
+                castSpellB("å¯’å†°æŠ¤ä½“(ç­‰çº§ 6)")
                 moveA(-1279.51,2920.76,87.9473)
                 moveA(-1273.6,2903.67,87.7759)
                 moveA(-1209.8,2904.93,86.4382)
-                useLua("/party follow2") --ÈÃĞ¡ºÅ³ö±¾
+                useLua("/party follow2") --è®©å°å·å‡ºæœ¬
                 moveA(-1185.54,2881.45,85.9243)
-                useLua("/run ResetInstances()") --ÖØÖÃ
+                useLua("/run ResetInstances()") --é‡ç½®
             end
         end      
-    else -- Èç¹ûÉíÉÏ´ø×ÅÁé»ê×´Ì¬µÄDebuff(ÈËÎïËÀÍö)
-        -- ¸±±¾ÍâÅÜÊ¬Á÷³Ì
-        -- 1.ÅÜÊ¬½ø±¾
-        -- 2.³ö±¾
-        -- ÕâÑù£¬½Å±¾»á×Ô¶¯Ñ­»·µ½ÉÏÃæµÄË¢¹ÖÁ÷³Ì£¬¹¹³ÉÒ»¸öÑ­»·
+    else -- å¦‚æœèº«ä¸Šå¸¦ç€çµé­‚çŠ¶æ€çš„Debuff(äººç‰©æ­»äº¡)
+        -- å‰¯æœ¬å¤–è·‘å°¸æµç¨‹
+        -- 1.è·‘å°¸è¿›æœ¬
+        -- 2.å‡ºæœ¬
+        -- è¿™æ ·ï¼Œè„šæœ¬ä¼šè‡ªåŠ¨å¾ªç¯åˆ°ä¸Šé¢çš„åˆ·æ€ªæµç¨‹ï¼Œæ„æˆä¸€ä¸ªå¾ªç¯
         moveA(-1448.83,1969.32,85.3652)
         moveA(-1461.65,1964.45,85.4928)
         moveA(-1461.74,2004.58,78.4378)
@@ -1327,7 +1327,7 @@ function main()
         moveA(-1186.97,2880.6,85.8574)
         moveB(-1183.42,2869.79,85.6598)
         waitForLoading()
-        moveB(754.893,-628.817,-32.774)--³ö±¾
+        moveB(754.893,-628.817,-32.774)--å‡ºæœ¬
         waitForLoading()
     end
 end
