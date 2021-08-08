@@ -29,6 +29,7 @@ function pickUp() --拾取
                 if distance < 15 and distance >= 0 then -- 如果在8码范围内，防止去拾取太远的目标，然后被卡住
                     contactTarget(ID1,ID2) --拾取目标
                     useLua("/click AceGUI30Button1") --销毁垃圾
+                    useLua("/click AceGUI30Button11") --销毁垃圾
                     sleep(100)
                     useLua("/click StaticPopup1Button1") --拾取蓝装
                 else --范围外就跳出循环
@@ -37,6 +38,8 @@ function pickUp() --拾取
             else --代表没有可以拾取的目标了，跳出循环
                 break
             end
+        else
+            break
         end
     end
    
@@ -120,7 +123,7 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
     moveA(-235.061,1562.24,76.8921)
     moveA(-233.711,1564.56,76.8921)
     moveB(-231.412,1570.74,76.8921)
-    sleep(10000)
+    waitForLoading()
     --上面是进本，要等待读条10s
 
     moveA(-228.191,2111.41,76.8904) -- 准备工作
@@ -564,7 +567,7 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
 
     unusedBag = getUnusedAllBagSlotNum()--获得背包剩余的格子数目
     headDuration = getEquipementDurationBySlotNum(1)
-    if unusedBag >= 10 and headDuration >= 10 then --如果装备不红，背包没满，就出本继续
+    if unusedBag >= 14 and headDuration >= 10 then --如果装备不红，背包没满，就出本继续
         
         moveA(-146.44,2173.7,127.953)
         moveA(-155.118,2176.78,128.676)
@@ -610,14 +613,14 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
         moveA(-229.484,2109.7,76.8899)
         useLua("/party follow2")
         moveB(-230.714,2106.73,76.8906)
-        sleep(10000)
+        waitForLoading()
         useLua("/run ResetInstances()") --重置
         --结束等待读条10s
 
     elseif unusedBag <= 10 or headDuration <= 10 then --回城修理
         if unusedBag ~= -1 and headDuration ~= -1 then
             useItem("炉石")
-            sleep(22000)--等待读条 和 加载蓝条结束
+            waitForLoading()
             moveA(507.828,1633.19,125.944)
             moveA(507.777,1627.18,125.668)
             mail()
@@ -687,8 +690,8 @@ else --如果身上有灵魂状态的debuff
     moveA(-248.621,1527.58,77.1667)
     moveA(-240.966,1548.48,76.8923)
     moveB(-231.412,1570.74,76.8921)
-    sleep(10000)
+    waitForLoading()
     moveB(-230.714,2106.73,76.8906)
-    sleep(10000)
+    waitForLoading()
 
 end

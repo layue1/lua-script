@@ -129,7 +129,7 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
     moveA(2913.34,-824.399,160.327)
     moveA(2917.79,-822.329,160.327)
     moveB(2919.92,-822.062,160.327)
-    sleep(10000)
+    waitForLoading()
 
     -- 进本 后
     drink()
@@ -318,6 +318,8 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
     castSpellB("魔爆术(等级 1)")
     moveA(972.791,1416.44,20.9934)
     castSpellB("魔爆术(等级 1)")
+    moveA(963.535,1415.97,18.678)
+    castSpellB("魔爆术(等级 1)")
     moveA(965.56,1412.73,18.6778)
     castSpellB("法力护盾(等级 7)")
     moveA(967.27,1409.97,18.6778)
@@ -472,12 +474,12 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
         moveA(853.65,1315.96,18.6723)
         useLua("/party follow2")
         moveB(852.499,1312.79,18.6714)
-        sleep(10000)
+        waitForLoading()
         useLua("/run ResetInstances()") --重置
     elseif unusedBag <= 10 or headDuration <= 10 then --如果装备红了或者背包满了回城修理
         if unusedBag ~= -1 and headDuration ~= -1 then  --再次验证数据是否成功
             useItem("炉石")
-            sleep(22000)--等待读条 和 加载蓝条结束
+            waitForLoading()
             moveA(2269.6,243.257,34.257)
             moveA(2269.03,240.603,34.257)
             moveA(2247.02,242.901,34.2605)
@@ -567,7 +569,7 @@ else -- 如果身上带着灵魂状态的Debuff(人物死亡)
     moveA(2918.2,-822.134,160.327)
     moveA(2917.79,-822.329,160.327)
     moveB(2919.92,-822.062,160.327)
-    sleep(10000)
+    waitForLoading()
     moveB(852.499,1312.79,18.6714)
-    sleep(10000)
+    waitForLoading()
 end

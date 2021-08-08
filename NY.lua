@@ -67,7 +67,7 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
     --进本
     moveA(1813.32,-4413.76,-18.3619)
     moveB(1818.68,-4425.61,-20.313)
-    sleep(10000)
+    waitForLoading()
     --进本后-- 副本内刷怪流程
     moveA(1.60201,-9.73047,-16.064)
     drink()
@@ -399,7 +399,7 @@ if IsBuffExist(8326) == 0 then -- 如果身上没有带着灵魂状态的Debuff
     moveA(-0.469735,-21.7409,-19.581)
     useLua("/party follow2")
     moveB(2.52141,-3.43138,-14.062)
-    sleep(10000)--等待出本读条结束
+    waitForLoading()
     useLua("/run ResetInstances()") --重置
   
 else -- 如果身上带着灵魂状态的Debuff(人物死亡)
@@ -433,7 +433,7 @@ else -- 如果身上带着灵魂状态的Debuff(人物死亡)
     moveA(1810.94,-4410.15,-18.5167)
     moveA(1814.52,-4417.33,-18.5257)
     moveB(1818.34,-4424.93,-20.1594)
-    sleep(10000)
+    waitForLoading()
     moveB(2.52141,-3.43138,-14.062)
-    sleep(10000)
+    waitForLoading()
 end
