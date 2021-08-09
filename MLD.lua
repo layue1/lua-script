@@ -13,6 +13,11 @@ function mail()
             sleep(500) -- 略微延迟，防止发邮件卡住
         end
     end
+    contactClosetMailObjec()--与邮箱互动
+    clickSendMailFrame()--打开发送页面
+    putMailMoney(150)--放入1G
+    setMailTargetName()--填写名字，名字在脚本界面填写
+    sendMail()--发送邮件
 end
 
 function pickUp(x,y) --拾取
@@ -30,9 +35,6 @@ function pickUp(x,y) --拾取
                 distance = getTargetAndPositionDistanceByID(ID1,ID2,x,y,3) --获得目标与玩家的距离
                 if distance <= 7 and distance >= 0 then -- 如果在8码范围内，防止去拾取太远的目标，然后被卡住
                     contactTarget(ID1,ID2) --拾取目标
-                    useLua("/click AceGUI30Button11") --销毁垃圾
-                    useLua("/click AceGUI30Button1") --销毁垃圾
-         
                     sleep(300)
                     useLua("/click StaticPopup1Button1") --拾取蓝装
                     useItem("浮渣覆盖的袋子")
@@ -77,11 +79,11 @@ end
 
 function openGate()
     local ID1,ID2 = getClosetTargetIDToAPositionFilterName("石门",-1422.38, 2924.89,6,3)
-    local flag1 = getTargetFlag1ByID(ID1,ID2,6)
-    if flag1 == 1 then
+    --local flag1 = getTargetFlag1ByID(ID1,ID2,6)
+    --if flag1 == 1 then
         contactTarget(ID1,ID2)
         sleep(2000)
-    end
+    --end
 end
 
 function drink()
@@ -183,7 +185,7 @@ function ifMnionsUnderFloor(x,y,z) --检测怪群是否到楼梯下
     local ID1,ID2,distance,spellID = 0,0,0,0
     while getRoleCurrentMP() ~= -1 and getRoleCurrentMP() ~= 0 and getRoleflag1() ~= 0x04 do
         sleep(100)
-        if getRoleCurrentHP() < 70 then
+        if getRoleCurrentHP() < 50 then
             useItem("灵纹布绷带")
         end
         if getRoleCurrentMP() < 40 then
@@ -309,15 +311,15 @@ function IfminionsOnUp(x,y,z)--检测怪群是否到上方下雪点
                 castSpellA("暴风雪(等级 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
-                for i = 1, 100 do
+                for i = 1, 50 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() > 40 then
-                        prints("暴风雪被打断")
+                        --prints("暴风雪被打断")
                         castSpellA("暴风雪(等级 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     elseif spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() <= 40 then
-                        prints("暴风雪被打断")
+                        --prints("暴风雪被打断")
                         castSpellA("暴风雪(等级 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
@@ -327,7 +329,7 @@ function IfminionsOnUp(x,y,z)--检测怪群是否到上方下雪点
                     if distance <= 6 and distance >= 0 then
                         return 0
                     end
-                    sleep(81)
+                    sleep(158)
                 end
                 coolDown = getSpellCoolDown(12043)
                 if coolDown == 1 then
@@ -373,15 +375,15 @@ function IfminionsOnDown(x,y,z) --检测怪群是否到下方下雪点
                 castSpellA("暴风雪(等级 7)")
                 sleep(5)
                 castSpellPosition(x,y,z)
-                for i = 1, 100 do
+                for i = 1, 50 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() > 40 then
-                        prints("暴风雪被打断")
+                        --prints("暴风雪被打断")
                         castSpellA("暴风雪(等级 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     elseif spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() <= 40 then
-                        prints("暴风雪被打断")
+                        --prints("暴风雪被打断")
                         castSpellA("暴风雪(等级 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
@@ -393,7 +395,7 @@ function IfminionsOnDown(x,y,z) --检测怪群是否到下方下雪点
                         return 0
                     end
                     --]]
-                    sleep(81)
+                    sleep(158)
                 end
 
                 return 0
@@ -436,12 +438,12 @@ function IfminionsOnMid(x,y,z) --检测怪群是否到下方下雪点
                 for i = 1, 100 do
                     spellID = getRoleCurrentSpellID()
                     if spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() > 40 then
-                        prints("暴风雪被打断")
+                        --prints("暴风雪被打断")
                         castSpellA("暴风雪(等级 7)")
                         sleep(5)
                         castSpellPosition(x,y,z)
                     elseif spellID ~= 0xCB and spellID ~= 0xCD and spellID ~= 0x0a and getRoleCurrentMP() <= 40 then
-                        prints("暴风雪被打断")
+                        --prints("暴风雪被打断")
                         castSpellA("暴风雪(等级 1)")
                         sleep(5)
                         castSpellPosition(x,y,z)
@@ -1108,7 +1110,8 @@ function main()
             moveA(806.339,-505.818,-40.9462)--4
             pickUp(806.339,-505.818,-40.9462)   
             moveA(806.339,-505.818,-40.9462)--4
-            
+            useLua("/click AceGUI30Button11") --销毁垃圾
+            useLua("/click AceGUI30Button1") --销毁垃圾
             moveA(801.572,-494.447,-39.7554)
             moveA(784.643,-490.146,-40.0709)
             moveA(767.381,-470.598,-41.0766)
@@ -1171,6 +1174,8 @@ function main()
                 moveA(806.339,-505.818,-40.9462)--4
                 pickUp(806.339,-505.818,-40.9462)   
                 moveA(806.339,-505.818,-40.9462)--4
+                useLua("/click AceGUI30Button11") --销毁垃圾
+                useLua("/click AceGUI30Button1") --销毁垃圾
                 sleep(3000)
                 useItem("炉石")
                 waitForLoading()--等待读条 和 加载蓝条结束
