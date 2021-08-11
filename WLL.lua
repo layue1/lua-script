@@ -79,6 +79,7 @@ function mail()
     putMailMoney(3)--放入1G
     setMailTargetName1()--填写名字，名字在脚本界面填写
     sendMail()--发送邮件
+    useLua("/click MailFrameCloseButton")
 end
 
 function silence(name,x,y) --反制
