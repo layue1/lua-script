@@ -73,6 +73,7 @@ function mail()
     putMailMoney(150)--放入1G
     setMailTargetName()--填写名字，名字在脚本界面填写
     sendMail()--发送邮件
+    sleep(500) -- 略微延迟，防止发邮件卡住
     contactClosetMailObjec()--与邮箱互动
     clickSendMailFrame()--打开发送页面
     putMailMoney(3)
