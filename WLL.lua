@@ -117,6 +117,7 @@ function watchLobster() --观察龙虾人走位
     end
 end
 
+
 function stormLobster1() --暴风雪龙虾人1
     local ID1,ID2,distance1,distance2 = 0,0,0,0
     local x,y,z = 0,0,0
